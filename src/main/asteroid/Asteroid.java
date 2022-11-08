@@ -1,5 +1,6 @@
-package main.asteroide;
+package main.asteroid;
 
+import main.collision.AsteroidCollider;
 import main.interfaces.Movable;
 import main.interfaces.ScreenWrapper;
 import main.vector.Vector;
@@ -51,5 +52,8 @@ public class Asteroid implements Movable<Asteroid>, ScreenWrapper<Asteroid> {
         return this.speed;
     }
 
+    public AsteroidCollider getCollider(){
+        return new AsteroidCollider(this);
+    }
 
 }

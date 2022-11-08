@@ -1,23 +1,9 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-class Nave {
-
-}
-
+class Nave {}
 interface Movable {}
-
 class Weapon {}
-
-class Life {
-   left
-}
-
-class Bullet {
-   tamaño
-   daño
-}
-
 class Asteroid {}
 
 
