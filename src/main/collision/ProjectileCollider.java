@@ -1,7 +1,9 @@
 package main.collision;
 
+import main.asteroid.Asteroid;
 import main.damage.Projectile;
 import main.interfaces.Movable;
+import main.ship.Ship;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -30,17 +32,20 @@ public class ProjectileCollider implements GameCollider{
     }
 
     @Override
-    public void handleCollisionWith(ShipCollider shipCollider) {
-
+    public Ship handleCollisionWith(ShipCollider shipCollider) {
+        Movable model = shipCollider.getModel();
+        return (Ship) model.decreaseLives(3);
     }
 
     @Override
-    public void handleCollisionWith(AsteroidCollider asteroidCollider) {
-
+    public Asteroid handleCollisionWith(AsteroidCollider asteroidCollider) {
+        Movable model = asteroidCollider.getModel();
+        return (Asteroid) model.decreaseLives(1);
     }
 
     @Override
-    public void handleCollisionWith(ProjectileCollider bulletCollider) {
-
+    public Projectile handleCollisionWith(ProjectileCollider bulletCollider) {
+        Movable model = bulletCollider.getModel();
+        return (Projectile) model;
     }
 }

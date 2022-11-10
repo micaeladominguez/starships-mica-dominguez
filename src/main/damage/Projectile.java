@@ -12,12 +12,19 @@ public class Projectile implements Movable<Projectile> {
     public final int damage;
     public final float speed;
 
-    public Projectile(Vector position, Vector direction, String id, int damage, float speed) {
+    public final int lives;
+
+    public Projectile(Vector position, Vector direction, String id, int damage, float speed, int lives) {
         this.position = position;
         this.direction = direction;
         this.idShip = id;
         this.damage = damage;
         this.speed = speed;
+        this.lives = lives;
+    }
+
+    public int getLives() {
+        return lives;
     }
 
     public String getIdShip() {
@@ -30,12 +37,12 @@ public class Projectile implements Movable<Projectile> {
 
     @Override
     public Projectile moveForward() {
-        return new Projectile(getPosition().add(getDirection().multiply(speed)), getDirection(), idShip, damage, getSpeed());
+        return new Projectile(getPosition().add(getDirection().multiply(speed)), getDirection(), idShip, damage, getSpeed(), lives);
     }
 
     @Override
     public Projectile moveBackward() {
-        return new Projectile(getPosition().subtract(getDirection().multiply(speed)), getDirection(), idShip, damage, getSpeed());
+        return new Projectile(getPosition().subtract(getDirection().multiply(speed)), getDirection(), idShip, damage, getSpeed(), lives);
     }
     @Override
     public Vector getPosition() {
@@ -50,6 +57,11 @@ public class Projectile implements Movable<Projectile> {
     @Override
     public float getSpeed() {
         return this.speed;
+    }
+
+    @Override
+    public Projectile decreaseLives(int lives) {
+        return new Projectile(position, direction, idShip, damage, speed, 0);
     }
 
     public ProjectileCollider getCollider(){

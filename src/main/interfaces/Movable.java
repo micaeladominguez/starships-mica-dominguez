@@ -9,4 +9,6 @@ public interface Movable<T extends Movable<T>> {
      Vector getPosition();
      Vector getDirection();
      float getSpeed();
+     T decreaseLives(int lives);
+
 }

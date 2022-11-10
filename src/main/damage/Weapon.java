@@ -9,6 +9,7 @@ public class Weapon {
     private final int q_damage;
     private final float speed;
 
+
     public Weapon(int q_bullet, int q_damage, float speed) {
         this.q_bullet = q_bullet;
         this.q_damage = q_damage;
@@ -30,7 +31,7 @@ public class Weapon {
     public ArrayList<Projectile> shoot(Vector position, Vector direction, String id){
         ArrayList<Projectile> projectiles = new ArrayList<>();
         for (int i = 0; i < getQ_bullet(); i++) {
-            projectiles.add(new Projectile(position, direction, id, getQ_damage(), getSpeed()));
+            projectiles.add(new Projectile(position, direction, id, getQ_damage(), getSpeed(), 1));
         }
         return projectiles;
     }
