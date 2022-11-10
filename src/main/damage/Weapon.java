@@ -31,7 +31,7 @@ public class Weapon {
     public ArrayList<Projectile> shoot(Vector position, Vector direction, String id){
         ArrayList<Projectile> projectiles = new ArrayList<>();
         for (int i = 0; i < getQ_bullet(); i++) {
-            projectiles.add(new Projectile(position, direction, id, getQ_damage(), getSpeed(), 1));
+            projectiles.add(new Projectile("proj1", position, direction, id, getQ_damage(), getSpeed(), 1));
         }
         return projectiles;
     }

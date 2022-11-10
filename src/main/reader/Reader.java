@@ -1,10 +1,8 @@
-package main.setUp;
+package main.reader;
 
 import java.io.*;
-import java.nio.channels.FileChannel;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
+//TODO define writer and reader and initial situations
 public class Reader {
     public static void main1(String[] args) {
         try {

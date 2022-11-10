@@ -1,0 +1,5 @@
+type:Asteroid,lives:5,speed:0.5,positionX:0,positionY:1,directionX:1,directionY:0
+type:Asteroid,lives:5,speed:0.5,positionX:0,positionY:5,directionX:1,directionY:0
+type:Asteroid,lives:5,speed:0.5,positionX:0,positionY:7,directionX:1,directionY:0
+type:Asteroid,lives:5,speed:0.5,positionX:0,positionY:9,directionX:1,directionY:0
+type:Asteroid,lives:5,speed:0.5,positionX:0,positionY:12,directionX:1,directionY:0

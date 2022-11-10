@@ -5,16 +5,16 @@ import main.interfaces.Movable;
 import main.vector.Vector;
 
 public class Projectile implements Movable<Projectile> {
-
+    private final String id;
     public final Vector position;
     public final Vector direction;
     public final String idShip;
     public final int damage;
     public final float speed;
-
     public final int lives;
 
-    public Projectile(Vector position, Vector direction, String id, int damage, float speed, int lives) {
+    public Projectile(String id1, Vector position, Vector direction, String id, int damage, float speed, int lives) {
+        this.id = id1;
         this.position = position;
         this.direction = direction;
         this.idShip = id;
@@ -37,12 +37,12 @@ public class Projectile implements Movable<Projectile> {
 
     @Override
     public Projectile moveForward() {
-        return new Projectile(getPosition().add(getDirection().multiply(speed)), getDirection(), idShip, damage, getSpeed(), lives);
+        return new Projectile(id, getPosition().add(getDirection().multiply(speed)), getDirection(), idShip, damage, getSpeed(), lives);
     }
 
     @Override
     public Projectile moveBackward() {
-        return new Projectile(getPosition().subtract(getDirection().multiply(speed)), getDirection(), idShip, damage, getSpeed(), lives);
+        return new Projectile(id, getPosition().subtract(getDirection().multiply(speed)), getDirection(), idShip, damage, getSpeed(), lives);
     }
     @Override
     public Vector getPosition() {
@@ -61,7 +61,12 @@ public class Projectile implements Movable<Projectile> {
 
     @Override
     public Projectile decreaseLives(int lives) {
-        return new Projectile(position, direction, idShip, damage, speed, 0);
+        return new Projectile(id, position, direction, idShip, damage, speed, 0);
+    }
+
+    @Override
+    public String getId() {
+        return null;
     }
 
     public ProjectileCollider getCollider(){
