@@ -2,6 +2,7 @@ package edu.austral.ingsis.starships
 
 import edu.austral.ingsis.starships.ui.*
 import edu.austral.ingsis.starships.ui.ElementColliderType.*
+import edu.austral.mica.application.ApplicationStarships
 import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.scene.Scene
@@ -9,7 +10,7 @@ import javafx.scene.input.KeyCode
 import javafx.stage.Stage
 
 fun main() {
-    launch(Starships::class.java)
+    launch(ApplicationStarships::class.java)
 }
 
 class Starships() : Application() {
