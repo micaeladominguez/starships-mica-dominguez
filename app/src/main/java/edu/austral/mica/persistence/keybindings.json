@@ -1,0 +1,12 @@
+[
+    {
+        "accelerate": "UP",
+        "brake": "DOWN",
+        "rotate_clockwise": "RIGHT",
+        "rotate_counterclockwise": "LEFT",
+        "shoot": "L",
+        "change_weapon": "O",
+        "pause": "P",
+        "save": "ENTER"
+    }
+]

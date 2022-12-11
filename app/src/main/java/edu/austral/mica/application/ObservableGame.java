@@ -1,6 +1,6 @@
 package edu.austral.mica.application;
 
-import edu.austral.mica.game.Game;
+import edu.austral.mica.game.game.Game;
 
 import java.util.ArrayList;
 import java.util.HashMap;

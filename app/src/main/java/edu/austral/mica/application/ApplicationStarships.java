@@ -1,13 +1,13 @@
 package edu.austral.mica.application;
 import edu.austral.ingsis.starships.ui.*;
-import edu.austral.mica.game.Game;
-import edu.austral.mica.interfaces.Movable;
+import edu.austral.mica.application.listeners.CollisionListener;
+import edu.austral.mica.application.listeners.KeyPressedListener;
+import edu.austral.mica.application.listeners.TimeListener;
+import edu.austral.mica.application.adapter.Adapter;
+import edu.austral.mica.application.adapter.UIAdapter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ApplicationStarships extends Application {
     double heightAsteroid = 30.0;
@@ -27,14 +27,12 @@ public class ApplicationStarships extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         observableGame = new ObservableGame();
-        System.out.println("Elements facade  :" + facade.getElements());
         observableGame.observe(new UIAdapter(this.facade.getElements()));
         observableGame.setGame(observableGame.game.defineFirstMap(800, 800));
         Adapter.adaptElement(facade.getElements(), observableGame.game.getElements());
         facade.getTimeListenable().addEventListener(new TimeListener(observableGame,800, 800));
         facade.getCollisionsListenable().addEventListener(new CollisionListener(observableGame));
-        //TODO : ME FALTA EL LISTENER DEL STARSHIPS
-       // keyTracker.getKeyPressedListenable().addEventListener(new KeyPressedListener(starship));
+        keyTracker.getKeyPressedListenable().addEventListener(new KeyPressedListener(observableGame));
         Scene scene = new Scene(facade.getView());
         keyTracker.setScene(scene);
         primaryStage.setScene(scene);
@@ -43,7 +41,6 @@ public class ApplicationStarships extends Application {
         facade.start();
         keyTracker.start();
         primaryStage.show();
-
     }
 
     @Override
