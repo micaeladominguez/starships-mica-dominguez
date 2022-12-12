@@ -1,6 +1,7 @@
-package edu.austral.mica.game.action;
+package edu.austral.mica.game.action.actionsImp;
 
 import edu.austral.mica.application.ObservableGame;
+import edu.austral.mica.game.action.Action;
 import edu.austral.mica.game.game.Game;
 
 public class RotateShipCounterclockwiseAction implements Action {

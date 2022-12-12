@@ -1,0 +1,29 @@
+
+
+{
+    "ships": [
+        {
+            "weapon": "DEFAULT",
+            "lives": 5,
+            "initial_direction": "DEFAULT_DIRECTION_1",
+            "speed": "0.01",
+            "acceleration": "0.0"
+        },
+        {
+            "weapon": "DEFAULT",
+            "lives": 5,
+            "initial_direction": "DEFAULT_DIRECTION",
+            "speed": "0.01",
+            "acceleration": "0.0"
+        }
+
+
+
+    ],
+
+    "window": {
+        "height": 800,
+        "width": 800,
+        "players": 2
+    }
+}

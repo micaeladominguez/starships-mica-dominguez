@@ -1,10 +1,13 @@
 package edu.austral.mica.application;
 import edu.austral.ingsis.starships.ui.*;
+import edu.austral.mica.application.initializer.ApplicationInitializer;
+import edu.austral.mica.application.initializer.GameInitialization;
 import edu.austral.mica.application.listeners.CollisionListener;
 import edu.austral.mica.application.listeners.KeyPressedListener;
 import edu.austral.mica.application.listeners.TimeListener;
 import edu.austral.mica.application.adapter.Adapter;
 import edu.austral.mica.application.adapter.UIAdapter;
+import edu.austral.mica.game.game.GameInitializer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -12,10 +15,6 @@ import javafx.stage.Stage;
 public class ApplicationStarships extends Application {
     double heightAsteroid = 30.0;
     double widthAsteroid = 30.0;
-
-    ImageRef starshipRef = new ImageRef("spaceship", 70.0, 70.0);
-    ImageRef asteroidRef = new ImageRef("asteroid", heightAsteroid, widthAsteroid);
-
 
     private CachedImageResolver imageResolver = new CachedImageResolver(new DefaultImageResolver());
     private ElementsViewFacade facade = new ElementsViewFacade(imageResolver);
@@ -28,8 +27,9 @@ public class ApplicationStarships extends Application {
     public void start(Stage primaryStage) throws Exception {
         observableGame = new ObservableGame();
         observableGame.observe(new UIAdapter(this.facade.getElements()));
-        observableGame.setGame(observableGame.game.defineFirstMap(800, 800));
+        observableGame.setGame(ApplicationInitializer.selectGameStart(GameInitialization.NEW, observableGame));
         Adapter.adaptElement(facade.getElements(), observableGame.game.getElements());
+        //TODO: descomponer en metodos, sacar lo que es fijo a lo que agarro en el archivo
         facade.getTimeListenable().addEventListener(new TimeListener(observableGame,800, 800));
         facade.getCollisionsListenable().addEventListener(new CollisionListener(observableGame));
         keyTracker.getKeyPressedListenable().addEventListener(new KeyPressedListener(observableGame));
