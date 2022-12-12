@@ -22,7 +22,7 @@ public class ApplicationStarships extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        observableGame = new ObservableGame();
+        observableGame = new ObservableGame(readQuantityOfPlayers());
         observableGame.observe(new UIAdapter(this.facade.getElements()));
         observableGame.setGame(ApplicationInitializer.selectGameStart(GameInitialization.NEW, observableGame));
         Adapter.adaptElement(facade.getElements(), observableGame.game.getElements());
@@ -38,6 +38,10 @@ public class ApplicationStarships extends Application {
         facade.start();
         keyTracker.start();
         primaryStage.show();
+    }
+
+    private Integer readQuantityOfPlayers() {
+        return WindowReader.readQuantityOfPlayers();
     }
 
     @Override

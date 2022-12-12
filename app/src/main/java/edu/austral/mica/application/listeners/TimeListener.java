@@ -6,6 +6,8 @@ import edu.austral.mica.application.ObservableGame;
 import edu.austral.mica.game.game.Game;
 import edu.austral.mica.persistence.Constants;
 
+import java.util.ArrayList;
+
 public class TimeListener implements EventListener<TimePassed> {
     ObservableGame observableGame;
     int width;
@@ -26,7 +28,15 @@ public class TimeListener implements EventListener<TimePassed> {
                 game.changePositions(width, height);
             }
             Game new_game = observableGame.getGame().changePositions(width, height);
+            showScores(new_game);
             observableGame.setGame(new_game);
+        }
+    }
+
+    private void showScores(Game newGame) {
+        ArrayList<Integer> integers = newGame.getScoresForShip();
+        for (Integer integer : integers) {
+            System.out.println(" SCORE FOR ship is " + integer);
         }
     }
 

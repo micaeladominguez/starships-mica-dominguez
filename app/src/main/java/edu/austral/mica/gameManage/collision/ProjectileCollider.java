@@ -37,7 +37,7 @@ public class ProjectileCollider implements GameCollider{
         if(checkIfOwnBullet(shipCollider)){
             return (Ship) model;
         };
-        return (Ship) model.decreaseLives(3);
+        return (Ship) model.decreaseLives(1);
     }
 
     private boolean checkIfOwnBullet(ShipCollider shipCollider) {

@@ -38,7 +38,7 @@ public class ShipCollider implements  GameCollider{
     @Override
     public Asteroid handleCollisionWith(AsteroidCollider asteroidCollider) {
         Movable model = asteroidCollider.getModel();
-        return (Asteroid) model.dead();
+        return (Asteroid) model.decreaseLives(2);
     }
 
     @Override

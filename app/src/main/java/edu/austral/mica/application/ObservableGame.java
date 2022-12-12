@@ -8,7 +8,11 @@ import java.util.HashMap;
 public class ObservableGame {
     ArrayList<GameObserver> observers = new ArrayList<>();
 
-    Game game = new Game(new HashMap<>());
+    Game game;
+
+    public ObservableGame(Integer quantityOfPlayers){
+        this.game = new Game(new HashMap<>(), quantityOfPlayers);
+    }
 
     public void observe(GameObserver observer){
         observers.add(observer);

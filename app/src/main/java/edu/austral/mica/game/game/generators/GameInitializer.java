@@ -47,7 +47,6 @@ public class GameInitializer {
     }
 
     private static Ship initializeShip(Integer idNumber, JSONObject ship, Integer differenceOnPosition){
-        // elements.put("ship1", new Ship("ship1", new Vector(400,300), new Vector(0,-1), 1F, 0, Constants.defaultWeapon,5 ));
         Vector position = definePosition(differenceOnPosition);
         String initialDirection = (String) ship.get("initial_direction");
         Vector direction = defineDirection(initialDirection);
@@ -77,7 +76,7 @@ public class GameInitializer {
         if(differenceOnPosition == 0){
             return vector;
         }else{
-            return new Vector(vector.getX() + differenceOnPosition, vector.getY() + differenceOnPosition);
+            return new Vector(vector.getX() - differenceOnPosition, vector.getY() + differenceOnPosition);
         }
     }
 
