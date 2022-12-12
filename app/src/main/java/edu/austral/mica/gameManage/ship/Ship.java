@@ -29,26 +29,18 @@ public class Ship implements Movable<Ship> {
 
     @Override
     public Ship moveForward() {
-        float newSpeed = changeSpeed();
         if(acceleration != 0F){
-            return new Ship(id, position.add(direction.multiply(speed)), direction,
-                    newSpeed, decreaseAcceleration(), weapon, lives);
+            return new Ship(id, position.add(direction.multiplyProjectileAndShip(speed)), direction,
+                    speed, acceleration, weapon, lives);
         }else{
             return this;
         }
     }
 
-    private float decreaseAcceleration() {
-        if(acceleration >= 0.05F){
-            return acceleration - 0.005F;
-        }else{
-            return 0F;
-        }
-    }
 
-    private float changeSpeed() {
-        if(acceleration != 0){
-            return speed + (0.5F*acceleration);
+    private float changeSpeed(float v) {
+        if(v != 0){
+            return speed + (0.005F*v);
         }
         return speed;
     }
@@ -72,7 +64,7 @@ public class Ship implements Movable<Ship> {
     }
 
     public Ship changeAcceleration() {
-        return new Ship(id, position.subtract(direction.multiply(speed)), direction, speed, acceleration + 0.05F, weapon, lives);
+        return new Ship(id, position.subtract(direction.multiply(speed)), direction, changeSpeed(acceleration + 0.05F), acceleration + 0.05F, weapon, lives);
     }
     public Ship stop() {
         return new Ship(id, position, direction, 0F, 0F, weapon, lives);

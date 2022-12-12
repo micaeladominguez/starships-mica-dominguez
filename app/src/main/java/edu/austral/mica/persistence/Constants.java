@@ -27,7 +27,7 @@ public class Constants {
 
     private static final int q_bullet_def = 2 ;
     private static final int q_damage_def = 1;
-    private static final float speed_proj = 0.1F;
+    private static final float speed_proj = 0.9F;
     private static final int q_bullet_oth1 = 4 ;
     private static final int q_damage_oth1 = 2;
     public static final Weapon defaultWeapon = new DefaultWeapon(q_bullet_def,q_damage_def,speed_proj);

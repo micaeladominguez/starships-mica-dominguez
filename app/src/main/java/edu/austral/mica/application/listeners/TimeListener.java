@@ -31,8 +31,6 @@ public class TimeListener implements EventListener<TimePassed> {
     }
 
     private boolean possibleNewAsteroid() {
-        System.out.println(Math.random() +  "   NUMBER");
-        System.out.println(Math.random() <= Constants.ASTEROID_NEW_RATE);
         return Math.random() <= Constants.ASTEROID_NEW_RATE;
     }
 }

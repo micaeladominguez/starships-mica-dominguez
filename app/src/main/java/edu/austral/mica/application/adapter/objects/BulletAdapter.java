@@ -14,7 +14,7 @@ public class BulletAdapter implements ObjectAdapter {
 
     public void adaptElement(Map<String, ElementModel> facade, Map<String, Movable> elements) {
         elements.forEach((k, v) -> {
-            if(k != null && v != null && k.startsWith("proj")){
+            if(k != null && v != null && k.contains("proj")){
                     facade.put(k, getElementModel(k, v));
             }
         });
@@ -29,6 +29,7 @@ public class BulletAdapter implements ObjectAdapter {
     }
 
     private static ImageRef getProjectileImage(Movable movable) {
-        return AdapterConstants.laser;
+        if(movable.getId().contains("DEFAULT")) return AdapterConstants.laser;
+        return AdapterConstants.explosiveBullet;
     }
 }

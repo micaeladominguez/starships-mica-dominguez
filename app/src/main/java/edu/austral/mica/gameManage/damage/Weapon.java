@@ -2,6 +2,7 @@ package edu.austral.mica.gameManage.damage;
 
 
 import edu.austral.mica.gameManage.vector.Vector;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -38,9 +39,16 @@ public abstract class Weapon {
         for (int i = 0; i < getQ_bullet(); i++) {
             addNewId();
             String id_proj = "proj" + id+ this.type+ counter;
-            projectiles.add(new Projectile(id_proj, new Vector(position.getX() + 10*(i+1), position.getY() + 10*(i+1)), direction.changeAngle(90), id, getQ_damage(), getSpeed(), 1));
+            projectiles.add(new Projectile(id_proj, definePosition(position, i, direction), direction.changeAngle(90), id, getQ_damage(), getSpeed(), 1));
         }
         return projectiles;
+    }
+
+    @NotNull
+    private static Vector definePosition(Vector position, int i, Vector direction) {
+        int simulated_speed = 40*(i+1);
+        Vector different_position = position.add(direction.multiplyProjectileAndShip((float) simulated_speed));
+        return new Vector(different_position.getX(), different_position.getY());
     }
 
     private static void addNewId() {

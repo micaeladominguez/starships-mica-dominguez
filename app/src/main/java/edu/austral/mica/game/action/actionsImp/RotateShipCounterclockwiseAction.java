@@ -12,6 +12,6 @@ public class RotateShipCounterclockwiseAction implements Action {
 
     @Override
     public Game runAction(ObservableGame observableGame) {
-        return observableGame.getGame().rotateShip(-90, shipId);
+        return observableGame.getGame().rotateShip(-25, shipId);
     }
 }

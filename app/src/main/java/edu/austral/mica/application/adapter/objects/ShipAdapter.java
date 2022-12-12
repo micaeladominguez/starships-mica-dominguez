@@ -3,7 +3,6 @@ package edu.austral.mica.application.adapter.objects;
 import edu.austral.ingsis.starships.ui.ElementModel;
 import edu.austral.mica.application.adapter.objects.ObjectAdapter;
 import edu.austral.mica.gameManage.interfaces.Movable;
-import edu.austral.ingsis.starships.ui.ImageRef;
 import edu.austral.ingsis.starships.ui.ElementColliderType;
 import org.jetbrains.annotations.NotNull;
 
