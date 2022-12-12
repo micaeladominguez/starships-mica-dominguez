@@ -1,4 +1,4 @@
-package edu.austral.mica.game.game;
+package edu.austral.mica.game.game.generators;
 
 import java.util.Random;
 

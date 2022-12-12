@@ -1,4 +1,4 @@
-package edu.austral.mica.game.game;
+package edu.austral.mica.game.game.generators;
 
 import edu.austral.mica.gameManage.asteroid.Asteroid;
 import edu.austral.mica.gameManage.vector.Vector;
@@ -6,7 +6,7 @@ import edu.austral.mica.persistence.Constants;
 
 import java.util.ArrayList;
 
-import static edu.austral.mica.game.game.RandomNumberGenerator.getRandomNumber;
+import static edu.austral.mica.game.game.generators.RandomNumberGenerator.getRandomNumber;
 
 public class AsteroidGenerator {
     static int counter = 0;

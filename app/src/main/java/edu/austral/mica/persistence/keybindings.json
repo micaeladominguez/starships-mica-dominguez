@@ -8,5 +8,15 @@
         "change_weapon": "O",
         "pause": "P",
         "save": "ENTER"
+    },
+    {
+        "accelerate": "W",
+        "brake": "S",
+        "rotate_clockwise": "D",
+        "rotate_counterclockwise": "A",
+        "shoot": "SPACE",
+        "change_weapon": "R",
+        "pause": "ESCAPE",
+        "save": "ENTER"
     }
 ]

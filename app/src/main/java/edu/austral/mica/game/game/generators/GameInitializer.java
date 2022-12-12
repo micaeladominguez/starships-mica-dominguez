@@ -1,4 +1,4 @@
-package edu.austral.mica.game.game;
+package edu.austral.mica.game.game.generators;
 
 import edu.austral.mica.gameManage.damage.Weapon;
 import edu.austral.mica.gameManage.interfaces.Movable;

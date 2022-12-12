@@ -1,12 +1,13 @@
 package edu.austral.mica.game.game;
 
 import edu.austral.ingsis.starships.ui.Collision;
+import edu.austral.mica.game.game.generators.AsteroidGenerator;
+import edu.austral.mica.game.game.generators.GameInitializer;
+import edu.austral.mica.game.game.managers.WeaponManager;
 import edu.austral.mica.gameManage.asteroid.Asteroid;
 import edu.austral.mica.gameManage.damage.Projectile;
 import edu.austral.mica.gameManage.interfaces.Movable;
 import edu.austral.mica.gameManage.ship.Ship;
-import edu.austral.mica.gameManage.vector.Vector;
-import edu.austral.mica.persistence.Constants;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

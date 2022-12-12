@@ -7,14 +7,11 @@ import edu.austral.mica.application.listeners.KeyPressedListener;
 import edu.austral.mica.application.listeners.TimeListener;
 import edu.austral.mica.application.adapter.Adapter;
 import edu.austral.mica.application.adapter.UIAdapter;
-import edu.austral.mica.game.game.GameInitializer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class ApplicationStarships extends Application {
-    double heightAsteroid = 30.0;
-    double widthAsteroid = 30.0;
 
     private CachedImageResolver imageResolver = new CachedImageResolver(new DefaultImageResolver());
     private ElementsViewFacade facade = new ElementsViewFacade(imageResolver);
@@ -48,6 +45,4 @@ public class ApplicationStarships extends Application {
         facade.stop();
         keyTracker.stop();
     }
-
-
 }
