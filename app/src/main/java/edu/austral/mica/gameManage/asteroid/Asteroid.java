@@ -21,7 +21,7 @@ public class Asteroid implements Movable<Asteroid>, ScreenWrapper<Asteroid> {
         this.id = id;
     }
 
-    public int getLives() {
+    public Integer getLives() {
         return lives;
     }
 

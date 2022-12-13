@@ -2,16 +2,19 @@ package edu.austral.mica.game.game;
 
 import edu.austral.ingsis.starships.ui.Collision;
 import edu.austral.mica.gameManage.interfaces.Movable;
+import edu.austral.mica.gameManage.ship.Ship;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class StopGame implements Game{
     private final Map<String, Movable> elements;
-    private final ArrayList<Integer> scoresForShip;
-    public StopGame(Map<String, Movable> elements, ArrayList<Integer> scoresForShip) {
+    private final Map<String, Integer> scoresForShip;
+    private final Map<String,Integer> livesForShip;
+    public StopGame(Map<String, Movable> elements, Map<String, Integer> scoresForShip, Map<String,Integer> livesForShip) {
         this.elements = elements;
         this.scoresForShip = scoresForShip;
+        this.livesForShip = livesForShip;
     }
 
 
@@ -66,8 +69,13 @@ public class StopGame implements Game{
     }
 
     @Override
-    public ArrayList<Integer> getScoresForShip() {
+    public Map<String, Integer> getScoresForShip() {
         return this.scoresForShip;
+    }
+
+    @Override
+    public Map<String, Integer> getLivesForShip() {
+        return this.livesForShip;
     }
 
     @Override
@@ -77,6 +85,11 @@ public class StopGame implements Game{
 
     @Override
     public Game unstopGame() {
-        return new LiveGame(elements, scoresForShip);
+        return new LiveGame(elements, scoresForShip,livesForShip);
+    }
+
+    @Override
+    public Ship checkForFinishedGame() {
+        return null;
     }
 }

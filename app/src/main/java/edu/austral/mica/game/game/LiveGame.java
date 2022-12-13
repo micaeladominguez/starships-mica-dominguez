@@ -9,6 +9,7 @@ import edu.austral.mica.gameManage.asteroid.Asteroid;
 import edu.austral.mica.gameManage.damage.Projectile;
 import edu.austral.mica.gameManage.interfaces.Movable;
 import edu.austral.mica.gameManage.ship.Ship;
+import edu.austral.mica.persistence.Constants;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -17,21 +18,25 @@ import java.util.Map;
 
 public class LiveGame implements Game{
    private final Map<String, Movable> elements;
-   private final ArrayList<Integer> scoresForShip;
+   private final Map<String,Integer> scoresForShip;
+    private final Map<String,Integer> livesForShip;
 
     public LiveGame(Map<String, Movable> elements, int q_ships) {
         this.elements = elements;
-        this.scoresForShip = new ArrayList<>();
-        generateFirstScores(q_ships);
+        this.scoresForShip = new HashMap<>();
+        this.livesForShip = new HashMap<>();
+        generateFirstScoresAndLives(q_ships);
     }
-    public LiveGame(Map<String, Movable> elements, ArrayList<Integer> scores) {
+    public LiveGame(Map<String, Movable> elements, Map<String, Integer> scores, Map<String,Integer> livesForShip) {
         this.elements = elements;
         this.scoresForShip = scores;
+        this.livesForShip = livesForShip;
     }
 
-    private void generateFirstScores(int qShips) {
+    private void generateFirstScoresAndLives(int qShips) {
         for (int i = 0; i < qShips; i++) {
-            scoresForShip.add(0);
+            scoresForShip.put("ship"+i, 0);
+            livesForShip.put("ship"+i, Constants.DEFAULT_STARSHIPS_LIVES);
         }
     }
 
@@ -47,7 +52,7 @@ public class LiveGame implements Game{
                 moveShip(elements, v);
             }
          });
-         return new LiveGame(elements,scoresForShip);
+         return new LiveGame(elements, scoresForShip, livesForShip);
     }
 
     private static void moveShip(Map<String, Movable> elements, Movable v) {
@@ -74,7 +79,7 @@ public class LiveGame implements Game{
     @NotNull
     private LiveGame getInitializeGame() {
         Map<String, Movable> defined_elements =  GameInitializer.initialize();
-        return new LiveGame(defined_elements,scoresForShip);
+        return new LiveGame(defined_elements, scoresForShip, livesForShip);
     }
 
 
@@ -85,7 +90,7 @@ public class LiveGame implements Game{
     public LiveGame handleCollision(Collision collision) {
         Movable movable = elements.get(collision.getElement1Id());
         Movable movable1 = elements.get(collision.getElement2Id());
-        ArrayList<Integer> possible_scores = ScoreManager.checkScoreForCollision(scoresForShip, movable, movable1);
+        Map<String,Integer> possible_scores = ScoreManager.checkScoreForCollision(scoresForShip, movable, movable1);
         if(movable1 != null && movable != null){
              Movable movable2= movable1.getCollider().handleCollisionWith(movable.getCollider());
              Movable movable3= movable.getCollider().handleCollisionWith(movable1.getCollider());
@@ -95,15 +100,18 @@ public class LiveGame implements Game{
         return checkAllLives(possible_scores);
     }
 
-    private LiveGame checkAllLives(ArrayList<Integer> possible_scores) {
+    private LiveGame checkAllLives(Map<String,Integer> possible_scores) {
         Map<String, Movable> elements = new HashMap<>();
         this.elements.forEach((k,v) ->{
             if(!v.isDead()){
                 elements.put(k,v);
+                if(v instanceof Ship)
+                    livesForShip.put(k, v.getLives());
             }
         });
-        return new LiveGame(elements, possible_scores);
+        return new LiveGame(elements, possible_scores, livesForShip);
     }
+
 
     private Ship getShip(String id) {
         Movable movable =  elements.get(id);
@@ -118,7 +126,7 @@ public class LiveGame implements Game{
             for (Projectile projectile : projectiles) {
                 elements.put(projectile.getId(), projectile);
             }
-            return new LiveGame(elements,scoresForShip);
+            return new LiveGame(elements,scoresForShip, livesForShip);
         }
         return this;
     }
@@ -129,7 +137,7 @@ public class LiveGame implements Game{
             Ship newShip = movable.changeAcceleration();
             elements.put(newShip.getId(), newShip);
         }
-        return new LiveGame(elements,scoresForShip);
+        return new LiveGame(elements,scoresForShip, livesForShip);
     }
 
     public LiveGame stopShip(String shipId) {
@@ -138,7 +146,7 @@ public class LiveGame implements Game{
             Ship newShip = movable.stop();
             elements.put(newShip.getId(), newShip);
         }
-        return new LiveGame(elements,scoresForShip);
+        return new LiveGame(elements,scoresForShip, livesForShip);
     }
 
     public LiveGame rotateShip(int i, String shipId) {
@@ -147,7 +155,7 @@ public class LiveGame implements Game{
             Ship newShip = movable.changeDirection(i);
             elements.put(newShip.getId(), newShip);
         }
-        return new LiveGame(elements,scoresForShip);
+        return new LiveGame(elements,scoresForShip, livesForShip);
     }
 
     public LiveGame changeWeapon(String shipId) {
@@ -156,27 +164,44 @@ public class LiveGame implements Game{
             Ship newShip = movable.changeWeapon(WeaponManager.decideWeapon(movable));
             elements.put(newShip.getId(), newShip);
         }
-        return new LiveGame(elements,scoresForShip);
+        return new LiveGame(elements,scoresForShip, livesForShip);
     }
 
 
     public LiveGame addAsteroid() {
         Asteroid asteroid = AsteroidGenerator.createAsteroid();
         elements.put(asteroid.getId(), asteroid);
-        return new LiveGame(elements,scoresForShip);
+        return new LiveGame(elements,scoresForShip, livesForShip);
     }
 
-    public ArrayList<Integer> getScoresForShip() {
+    public Map<String, Integer> getScoresForShip() {
         return scoresForShip;
     }
 
     @Override
+    public Map<String, Integer> getLivesForShip() {
+        return this.livesForShip;
+    }
+
+    @Override
     public Game stopGame() {
-        return new StopGame(elements, scoresForShip);
+        return new StopGame(elements, scoresForShip, livesForShip);
     }
 
     @Override
     public Game unstopGame() {
         return this;
+    }
+
+    @Override
+    public Ship checkForFinishedGame() {
+        ArrayList<Ship> ships = new ArrayList<>();
+        this.elements.forEach((k,v) ->{
+            if(v instanceof Ship && v.getLives() > 0){
+                ships.add((Ship) v);
+            }
+        });
+        if(ships.size() == 1) return ships.get(0);
+        return null;
     }
 }

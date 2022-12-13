@@ -3,8 +3,8 @@ package edu.austral.mica.game.game;
 import edu.austral.ingsis.starships.ui.Collision;
 
 import edu.austral.mica.gameManage.interfaces.Movable;
+import edu.austral.mica.gameManage.ship.Ship;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public interface Game {
@@ -27,8 +27,13 @@ public interface Game {
 
     Game addAsteroid();
 
-    ArrayList<Integer> getScoresForShip();
+    Map<String, Integer> getScoresForShip();
+    Map<String, Integer> getLivesForShip();
+
+
 
     Game stopGame();
     Game unstopGame();
+
+    Ship checkForFinishedGame();
 }

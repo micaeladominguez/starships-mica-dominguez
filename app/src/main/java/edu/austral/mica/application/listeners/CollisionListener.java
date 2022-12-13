@@ -5,7 +5,7 @@ import edu.austral.ingsis.starships.ui.EventListener;
 import edu.austral.mica.application.ObservableGame;
 import edu.austral.mica.game.game.Game;
 
-public class CollisionListener  implements EventListener<Collision> {
+public class CollisionListener implements EventListener<Collision> {
     ObservableGame observableGame;
 
     public CollisionListener(ObservableGame observableGame) {

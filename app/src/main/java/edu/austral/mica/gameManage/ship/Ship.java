@@ -86,6 +86,11 @@ public class Ship implements Movable<Ship> {
         return new Ship(id, position, direction, speed, acceleration, weapon, 0);
     }
 
+    @Override
+    public Integer getLives() {
+        return this.lives;
+    }
+
     public Ship changeWeapon(Weapon weapon){
         return new Ship(id, position, direction, speed, acceleration, weapon, lives);
     }

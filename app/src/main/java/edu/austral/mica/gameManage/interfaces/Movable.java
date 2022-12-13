@@ -14,4 +14,6 @@ public interface Movable<T extends Movable<T>> {
      GameCollider getCollider();
      boolean isDead();
      T dead();
+
+    Integer getLives();
 }

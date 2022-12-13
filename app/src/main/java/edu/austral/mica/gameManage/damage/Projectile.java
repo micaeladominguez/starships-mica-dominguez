@@ -24,7 +24,7 @@ public class Projectile implements Movable<Projectile> {
         this.lives = lives;
     }
 
-    public int getLives() {
+    public Integer getLives() {
         return lives;
     }
 

@@ -4,14 +4,14 @@
     "ships": [
         {
             "weapon": "DEFAULT",
-            "lives": 5,
+            "lives": 150,
             "initial_direction": "DEFAULT_DIRECTION_1",
             "speed": "0.01",
             "acceleration": "0.0"
         },
         {
             "weapon": "DEFAULT",
-            "lives": 5,
+            "lives": 150,
             "initial_direction": "DEFAULT_DIRECTION_1",
             "speed": "0.01",
             "acceleration": "0.0"

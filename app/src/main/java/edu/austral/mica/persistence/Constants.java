@@ -25,6 +25,8 @@ public class Constants {
     public static final float DEFAULT_ASTEROID_SPEED = 0.1F;
     public static final int DEFAULT_ASTEROID_LIVES = 2;
 
+    public static final int DEFAULT_STARSHIPS_LIVES = 150;
+
     private static final int q_bullet_def = 2 ;
     private static final int q_damage_def = 1;
     private static final float speed_proj = 0.9F;
