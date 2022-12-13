@@ -1,6 +1,7 @@
 package edu.austral.mica.application;
 
 import edu.austral.mica.game.game.Game;
+import edu.austral.mica.game.game.LiveGame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +12,7 @@ public class ObservableGame {
     Game game;
 
     public ObservableGame(Integer quantityOfPlayers){
-        this.game = new Game(new HashMap<>(), quantityOfPlayers);
+        this.game = new LiveGame(new HashMap<>(), quantityOfPlayers);
     }
 
     public void observe(GameObserver observer){

@@ -2,11 +2,8 @@ package edu.austral.mica.application.adapter;
 
 import edu.austral.ingsis.starships.ui.ElementModel;
 import edu.austral.mica.application.GameObserver;
-import edu.austral.mica.application.adapter.Adapter;
 import edu.austral.mica.game.game.Game;
-import edu.austral.mica.gameManage.interfaces.Movable;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class UIAdapter implements GameObserver {

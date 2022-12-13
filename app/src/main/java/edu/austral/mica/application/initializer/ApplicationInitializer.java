@@ -2,6 +2,7 @@ package edu.austral.mica.application.initializer;
 
 import edu.austral.mica.application.ObservableGame;
 import edu.austral.mica.game.game.Game;
+import edu.austral.mica.game.game.LiveGame;
 
 public class ApplicationInitializer {
     public static Game selectGameStart(GameInitialization selectedStartMode, ObservableGame observableGame) {

@@ -7,6 +7,7 @@
         "shoot": "L",
         "change_weapon": "O",
         "pause": "P",
+        "unpause": "H",
         "save": "ENTER"
     },
     {
@@ -17,6 +18,7 @@
         "shoot": "SPACE",
         "change_weapon": "R",
         "pause": "ESCAPE",
+        "unpause": "H",
         "save": "ENTER"
     }
 ]

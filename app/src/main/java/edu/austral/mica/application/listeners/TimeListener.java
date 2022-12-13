@@ -4,6 +4,7 @@ import edu.austral.ingsis.starships.ui.EventListener;
 import edu.austral.ingsis.starships.ui.TimePassed;
 import edu.austral.mica.application.ObservableGame;
 import edu.austral.mica.game.game.Game;
+import edu.austral.mica.game.game.LiveGame;
 import edu.austral.mica.persistence.Constants;
 
 import java.util.ArrayList;
@@ -28,12 +29,12 @@ public class TimeListener implements EventListener<TimePassed> {
                 game.changePositions(width, height);
             }
             Game new_game = observableGame.getGame().changePositions(width, height);
-            showScores(new_game);
+          //  showScores(new_game);
             observableGame.setGame(new_game);
         }
     }
 
-    private void showScores(Game newGame) {
+    private void showScores(LiveGame newGame) {
         ArrayList<Integer> integers = newGame.getScoresForShip();
         for (Integer integer : integers) {
             System.out.println(" SCORE FOR ship is " + integer);

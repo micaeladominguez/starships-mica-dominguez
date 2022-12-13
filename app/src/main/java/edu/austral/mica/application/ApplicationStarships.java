@@ -9,35 +9,60 @@ import edu.austral.mica.application.adapter.Adapter;
 import edu.austral.mica.application.adapter.UIAdapter;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import static java.util.Objects.requireNonNull;
 
 public class ApplicationStarships extends Application {
 
     private CachedImageResolver imageResolver = new CachedImageResolver(new DefaultImageResolver());
     private ElementsViewFacade facade = new ElementsViewFacade(imageResolver);
     private KeyTracker keyTracker = new KeyTracker();
+    Scene gameScene = new Scene(new StackPane());
 
     ObservableGame observableGame;
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        setObservableAndAdapter();
+        addListeners();
+        setScene(primaryStage);
+        startComponents(primaryStage);
+    }
+
+    private void startComponents(Stage primaryStage) {
+        facade.start();
+        keyTracker.start();
+        primaryStage.show();
+    }
+
+    private void setScene(Stage primaryStage) {
+        gameScene = new Scene(facade.getView());
+        addCssToFacade();
+        keyTracker.setScene(gameScene);
+        primaryStage.setScene(gameScene);
+        primaryStage.setHeight(800.0);
+        primaryStage.setWidth(800.0);
+    }
+
+    private void addCssToFacade() {
+        facade.getView().setId("facade");
+        gameScene.getStylesheets().add(requireNonNull(getClass().getClassLoader().getResource("gameStyles.css")).toString());
+    }
+
+    private void addListeners() {
+        facade.getTimeListenable().addEventListener(new TimeListener(observableGame,800, 800));
+        facade.getCollisionsListenable().addEventListener(new CollisionListener(observableGame));
+        keyTracker.getKeyPressedListenable().addEventListener(new KeyPressedListener(observableGame));
+    }
+
+    private void setObservableAndAdapter() {
         observableGame = new ObservableGame(readQuantityOfPlayers());
         observableGame.observe(new UIAdapter(this.facade.getElements()));
         observableGame.setGame(ApplicationInitializer.selectGameStart(GameInitialization.NEW, observableGame));
         Adapter.adaptElement(facade.getElements(), observableGame.game.getElements());
-        //TODO: descomponer en metodos, sacar lo que es fijo a lo que agarro en el archivo
-        facade.getTimeListenable().addEventListener(new TimeListener(observableGame,800, 800));
-        facade.getCollisionsListenable().addEventListener(new CollisionListener(observableGame));
-        keyTracker.getKeyPressedListenable().addEventListener(new KeyPressedListener(observableGame));
-        Scene scene = new Scene(facade.getView());
-        keyTracker.setScene(scene);
-        primaryStage.setScene(scene);
-        primaryStage.setHeight(800.0);
-        primaryStage.setWidth(800.0);
-        facade.start();
-        keyTracker.start();
-        primaryStage.show();
     }
 
     private Integer readQuantityOfPlayers() {

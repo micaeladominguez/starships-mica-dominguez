@@ -8,6 +8,6 @@ public class PauseGameAction implements Action {
 
     @Override
     public Game runAction(ObservableGame observableGame) {
-        return observableGame.getGame();
+        return observableGame.getGame().stopGame();
     }
 }

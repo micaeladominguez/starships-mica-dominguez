@@ -43,6 +43,7 @@ public class ScoreManager {
     }
 
     private static boolean bulletAndAsteroid(Movable movable1, Movable movable2) {
+        if(anyNull(movable1, movable2)) return false;
         return (movable1.getId().contains("ast") && movable2.getId().contains("proj")) ||
                 (movable1.getId().contains("proj") && movable2.getId().contains("ast"));
     }
@@ -69,6 +70,7 @@ public class ScoreManager {
     }
 
     private static boolean starshipAndBullet(Movable movable1, Movable movable2) {
+        if(anyNull(movable1, movable2)) return false;
         return (movable1.getId().contains("ship") && movable2.getId().contains("proj")) ||
                 (movable1.getId().contains("proj") && movable2.getId().contains("ship"));
     }
@@ -77,14 +79,17 @@ public class ScoreManager {
         Ship ship = getShip(movable1, movable2);
         if(ship != null){
             int index = getStarshipIndex(ship);
-            int actual_score = scoresForShip.get(index);
-            if(actual_score - 5 <= 0)
-                scoresForShip.set(index, 0);
-            scoresForShip.set(index, actual_score - 5);
+            if(index >= 0){
+                int actual_score = scoresForShip.get(index);
+                if(actual_score - 5 <= 0)
+                    scoresForShip.set(index, 0);
+                scoresForShip.set(index, actual_score - 5);
+            }
         }
     }
 
     private static int getStarshipIndex(Ship ship) {
+        if(ship == null) return -1;
         for(int i = 0; i < 10; i ++){
             if (ship.getId().contains("ship" + i)) return i;
         }
@@ -92,14 +97,20 @@ public class ScoreManager {
     }
 
     private static Ship getShip(Movable movable1, Movable movable2) {
+        if (anyNull(movable1, movable2)) return null;
         if (movable2 instanceof Ship) return (Ship) movable2;
         if (movable1 instanceof  Ship) return (Ship) movable1;
         return null;
     }
 
     private static boolean starshipAndAsteroid(Movable movable1, Movable movable2) {
+        if(anyNull(movable1, movable2)) return false;
         return (movable1.getId().contains("ship") && movable2.getId().contains("ast")) ||
                 (movable1.getId().contains("ast") && movable2.getId().contains("ship"));
+    }
+
+    private static boolean anyNull(Movable movable1, Movable movable2) {
+        return movable1 == null || movable2 == null;
     }
 
 }
