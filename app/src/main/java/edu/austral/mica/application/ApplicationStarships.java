@@ -20,9 +20,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 
-import java.awt.*;
 
-import static java.util.Objects.requireNonNull;
 
 public class ApplicationStarships extends Application {
 
@@ -54,13 +52,13 @@ public class ApplicationStarships extends Application {
         StackPane pane = new StackPane();
         StackPane stats = addText();
         StackPane finalText = finalStat();
-        pane.getChildren().addAll(root,stats,finalText);
+        pane.getChildren().addAll(root,stats, finalText);
         addCssToFacade(pane);
         Scene scene = new Scene(pane);
         keyTracker.setScene(scene);
         primaryStage.setScene(scene);
-        primaryStage.setHeight(800.0);
-        primaryStage.setWidth(800.0);
+        primaryStage.setHeight(WindowReader.readHeight());
+        primaryStage.setWidth(WindowReader.readWidth());
     }
 
     private StackPane finalStat() {
@@ -103,7 +101,7 @@ public class ApplicationStarships extends Application {
     }
 
     private void addListeners() {
-        facade.getTimeListenable().addEventListener(new TimeListener(observableGame,1920, 1820));
+        facade.getTimeListenable().addEventListener(new TimeListener(observableGame,WindowReader.readWidth(), WindowReader.readHeight()));
         facade.getCollisionsListenable().addEventListener(new CollisionListener(observableGame));
         keyTracker.getKeyPressedListenable().addEventListener(new KeyPressedListener(observableGame));
     }

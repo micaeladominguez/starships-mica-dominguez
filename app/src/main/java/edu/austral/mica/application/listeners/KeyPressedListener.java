@@ -36,13 +36,23 @@ public class KeyPressedListener implements EventListener<KeyPressed> {
            Iterator it = readJsonAndGetIterator();
            while (it.hasNext()) {
                JSONObject binding = (JSONObject) it.next();
-               createActionAndAdd(binding, ("ship"+id), map);
+               createActionAndAdd(binding, generateShipId(id), map);
                id++;
            }
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
         return map;
+    }
+
+    private String generateShipId(int id) {
+        if(id == 1){
+            return "ship"+id+"RED";
+        }else if(id == 2){
+            return "ship"+id+"BLUE";
+        }else{
+            return "ship"+id;
+        }
     }
 
     private void createActionAndAdd(JSONObject binding, String shipId, HashMap<KeyCode, Action> map) {

@@ -13,7 +13,8 @@ public class AsteroidGenerator {
 
     public static Asteroid createAsteroid(){
         ArrayList<Vector> directionAndPosition = getInitialPositionAndDirection();
-        return new Asteroid( directionAndPosition.get(1), directionAndPosition.get(0), Constants.DEFAULT_ASTEROID_SPEED, Constants.DEFAULT_ASTEROID_LIVES, generateId());
+
+        return new Asteroid( directionAndPosition.get(1), directionAndPosition.get(0), Constants.DEFAULT_ASTEROID_SPEED, Constants.ASTEROID_LIVES, generateId());
     }
 
     private static String generateId() {

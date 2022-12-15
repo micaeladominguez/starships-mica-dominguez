@@ -1,5 +1,6 @@
 package edu.austral.mica.persistence;
 
+import edu.austral.mica.application.WindowReader;
 import edu.austral.mica.gameManage.damage.DefaultWeapon;
 import edu.austral.mica.gameManage.damage.OtherWeapon1;
 import edu.austral.mica.gameManage.damage.Weapon;
@@ -10,20 +11,20 @@ public class Constants {
     public static final String KEYBINDINGS_FILE_PATH = "/home/mica/faculty/DS/starships-base/app/src/main/java/edu/austral/mica/persistence/keybindings.json";
     public static final String def = "DEFAULT";
     public static final String other1 = "OTHER1";
-    public static final Vector DEFAULT_STARSHIP_POSITION = new Vector(500, 200) ;
+    public static final Vector DEFAULT_STARSHIP_POSITION = new Vector(1000, 400) ;
     public static final Vector DEFAULT_STARSHIP_DIRECTION = new Vector(0, -1 );
 
     public static final Vector TOP_POSITION = new Vector(0,0);
-    public static final Vector BOTTOM_POSITION = new Vector(790,790);
-    public static final Vector RIGHT_POSITION = new Vector(790,400);
-    public static final Vector LEFT_POSITION = new Vector(0,400);
+    public static final Vector BOTTOM_POSITION = new Vector(1000,1000);
+    public static final Vector RIGHT_POSITION = new Vector(1000,0);
+    public static final Vector LEFT_POSITION = new Vector(0,1100);
 
     public static final Vector TOP_DIRECTION = new Vector(1, 1);
     public static final Vector BOTTOM_DIRECTION = new Vector(-1, -1);
-    public static final Vector RIGHT_DIRECTION = new Vector(-1, 0);
-    public static final Vector LEFT_DIRECTION = new Vector(+1, 0);
+    public static final Vector RIGHT_DIRECTION = new Vector(-1, 1);
+    public static final Vector LEFT_DIRECTION = new Vector(+1, -1);
     public static final float DEFAULT_ASTEROID_SPEED = 0.1F;
-    public static final int DEFAULT_ASTEROID_LIVES = 2;
+    public static final int ASTEROID_LIVES = 4;
 
     public static final int DEFAULT_STARSHIPS_LIVES = 150;
 

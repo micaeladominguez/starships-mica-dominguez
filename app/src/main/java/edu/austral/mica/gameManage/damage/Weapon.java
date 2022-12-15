@@ -46,7 +46,7 @@ public abstract class Weapon {
 
     @NotNull
     private static Vector definePosition(Vector position, int i, Vector direction) {
-        int simulated_speed = 40*(i+1);
+        int simulated_speed = 60*(i+1);
         Vector different_position = position.add(direction.multiplyProjectileAndShip((float) simulated_speed));
         return new Vector(different_position.getX(), different_position.getY());
     }

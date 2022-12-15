@@ -9,7 +9,6 @@ import edu.austral.mica.gameManage.asteroid.Asteroid;
 import edu.austral.mica.gameManage.damage.Projectile;
 import edu.austral.mica.gameManage.interfaces.Movable;
 import edu.austral.mica.gameManage.ship.Ship;
-import edu.austral.mica.persistence.Constants;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -19,25 +18,19 @@ import java.util.Map;
 public class LiveGame implements Game{
    private final Map<String, Movable> elements;
    private final Map<String,Integer> scoresForShip;
-    private final Map<String,Integer> livesForShip;
+   private final Map<String,Integer> livesForShip;
+
 
     public LiveGame(Map<String, Movable> elements, int q_ships) {
         this.elements = elements;
         this.scoresForShip = new HashMap<>();
         this.livesForShip = new HashMap<>();
-        generateFirstScoresAndLives(q_ships);
+
     }
     public LiveGame(Map<String, Movable> elements, Map<String, Integer> scores, Map<String,Integer> livesForShip) {
         this.elements = elements;
         this.scoresForShip = scores;
         this.livesForShip = livesForShip;
-    }
-
-    private void generateFirstScoresAndLives(int qShips) {
-        for (int i = 0; i < qShips; i++) {
-            scoresForShip.put("ship"+i, 0);
-            livesForShip.put("ship"+i, Constants.DEFAULT_STARSHIPS_LIVES);
-        }
     }
 
 
@@ -49,15 +42,18 @@ public class LiveGame implements Game{
             }else if(CheckType.checkIfProjectile(k)){
                 moveProjectile(elements, v);
             }else if(CheckType.checkIfShip(k)){
-                moveShip(elements, v);
+                moveShip(elements, v,  width, height);
+                checkAllLives(this.scoresForShip);
+
             }
          });
          return new LiveGame(elements, scoresForShip, livesForShip);
     }
 
-    private static void moveShip(Map<String, Movable> elements, Movable v) {
-        Movable movable = v.moveForward();
-        elements.put(movable.getId(), movable);
+    private static void moveShip(Map<String, Movable> elements, Movable v, int width, int height) {
+        Ship ship = (Ship) v.moveForward();
+        Ship shipWrapper = ship.screenWrap(width, height);
+        elements.put(shipWrapper.getId(), shipWrapper);
     }
 
     private static void moveProjectile(Map<String, Movable> elements, Movable v) {
@@ -72,14 +68,26 @@ public class LiveGame implements Game{
     }
 
 
-    public LiveGame createNewGame(){
+    public Game createNewGame(){
         return getInitializeGame();
     }
 
     @NotNull
-    private LiveGame getInitializeGame() {
-        Map<String, Movable> defined_elements =  GameInitializer.initialize();
-        return new LiveGame(defined_elements, scoresForShip, livesForShip);
+    private Game getInitializeGame() {
+        Map<String, Movable> definedElements =  GameInitializer.initialize();
+        return defineScoresAndLives(definedElements);
+    }
+
+    private Game defineScoresAndLives(Map<String, Movable> definedElements) {
+        HashMap<String, Integer> scoresForShip = new HashMap<>();
+        HashMap<String, Integer> livesForShip = new HashMap<>();
+        definedElements.forEach((k,v) ->{
+            if(v instanceof Ship){
+                scoresForShip.put(k,0);
+                livesForShip.put(k,v.getLives());
+            }
+        });
+        return new LiveGame(definedElements, scoresForShip, livesForShip);
     }
 
 
@@ -90,17 +98,21 @@ public class LiveGame implements Game{
     public LiveGame handleCollision(Collision collision) {
         Movable movable = elements.get(collision.getElement1Id());
         Movable movable1 = elements.get(collision.getElement2Id());
-        Map<String,Integer> possible_scores = ScoreManager.checkScoreForCollision(scoresForShip, movable, movable1);
+        Map<String,Integer> possibleScores = ScoreManager.checkScoreForCollision(scoresForShip, movable, movable1);
         if(movable1 != null && movable != null){
              Movable movable2= movable1.getCollider().handleCollisionWith(movable.getCollider());
              Movable movable3= movable.getCollider().handleCollisionWith(movable1.getCollider());
-             elements.put(movable2.getId(), movable2);
-             elements.put(movable3.getId(), movable3);
+             addMovables(movable2, movable3);
         }
-        return checkAllLives(possible_scores);
+        return checkAllLives(possibleScores);
     }
 
-    private LiveGame checkAllLives(Map<String,Integer> possible_scores) {
+    private void addMovables(Movable movable2, Movable movable3) {
+        elements.put(movable2.getId(), movable2);
+        elements.put(movable3.getId(), movable3);
+    }
+
+    private LiveGame checkAllLives(Map<String,Integer> possibleScores) {
         Map<String, Movable> elements = new HashMap<>();
         this.elements.forEach((k,v) ->{
             if(!v.isDead()){
@@ -109,13 +121,13 @@ public class LiveGame implements Game{
                     livesForShip.put(k, v.getLives());
             }
         });
-        return new LiveGame(elements, possible_scores, livesForShip);
+        return new LiveGame(elements, possibleScores, livesForShip);
     }
 
 
     private Ship getShip(String id) {
         Movable movable =  elements.get(id);
-        if(!CheckType.checkIfAsteroid(movable.getId())) return (Ship) movable;
+        if(movable != null && !CheckType.checkIfAsteroid(movable.getId())) return (Ship) movable;
         else return null;
     }
 
@@ -203,5 +215,10 @@ public class LiveGame implements Game{
         });
         if(ships.size() == 1) return ships.get(0);
         return null;
+    }
+
+    @Override
+    public Game saveGame() {
+        return this;
     }
 }

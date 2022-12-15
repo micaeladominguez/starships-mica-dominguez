@@ -3,8 +3,8 @@ package edu.austral.mica.game.game.managers;
 import edu.austral.mica.gameManage.damage.Projectile;
 import edu.austral.mica.gameManage.interfaces.Movable;
 import edu.austral.mica.gameManage.ship.Ship;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class ScoreManager {
@@ -17,7 +17,7 @@ public class ScoreManager {
             Ship ship = getShip(movable1, movable2);
             Projectile projectile = getProjectile(movable1, movable2);
             if(ship != null && projectile != null){
-                if(ownBullet(ship,projectile )) return scoresForShip;
+                if(ownBullet(ship,projectile)) return scoresForShip;
                 bulletCrash(scoresForShip, ship);
             }
         }
@@ -32,9 +32,20 @@ public class ScoreManager {
         Projectile projectile = getProjectile(movable1, movable2);
         if(projectile != null){
             int index = getIndexFromProjectile(projectile);
-            String shipId = "ship" + index;
+            String shipId = getShipId(index);
             int actual_score = scoresForShip.get(shipId);
             scoresForShip.put(shipId, actual_score + 15);
+        }
+    }
+
+    @NotNull
+    private static String getShipId(int index) {
+        if (index == 1) {
+            return "ship" + index + "RED";
+        } else if (index == 2) {
+            return "ship" + index + "BLUE";
+        } else {
+            return "ship" + index;
         }
     }
 
@@ -54,9 +65,7 @@ public class ScoreManager {
     private static void bulletCrash(Map<String, Integer> scoresForShip, Ship ship) {
         String id = getStarshipId(ship);
         int actual_score = scoresForShip.get(id);
-        if(actual_score - 4 <= 0)
-            scoresForShip.put(id, 0);
-        scoresForShip.put(id, actual_score - 4);
+        scoresForShip.put(id, Math.max(actual_score - 4, 0));
     }
 
     private static boolean ownBullet(Ship ship, Projectile projectile) {
@@ -83,10 +92,7 @@ public class ScoreManager {
         if(ship != null){
             String id = getStarshipId(ship);
             int actual_score = scoresForShip.get(id);
-            if(actual_score - 5 <= 0)
-                scoresForShip.put(id, 0);
-            scoresForShip.put(id, actual_score - 5);
-
+            scoresForShip.put(id, Math.max(actual_score - 5, 0));
         }
     }
 

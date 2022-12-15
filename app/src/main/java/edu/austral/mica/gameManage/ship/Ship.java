@@ -1,15 +1,17 @@
 package edu.austral.mica.gameManage.ship;
 
 
+import edu.austral.mica.gameManage.asteroid.Asteroid;
 import edu.austral.mica.gameManage.collision.ShipCollider;
 import edu.austral.mica.gameManage.damage.Projectile;
 import edu.austral.mica.gameManage.damage.Weapon;
+import edu.austral.mica.gameManage.interfaces.ScreenWrapper;
 import edu.austral.mica.gameManage.vector.Vector;
 import edu.austral.mica.gameManage.interfaces.Movable;
 
 import java.util.ArrayList;
 
-public class Ship implements Movable<Ship> {
+public class Ship implements Movable<Ship> , ScreenWrapper<Ship> {
     final private String id;
     final private Vector position;
     final private Vector direction;
@@ -117,5 +119,27 @@ public class Ship implements Movable<Ship> {
 
     public Weapon getWeapon() {
         return weapon;
+    }
+
+    @Override
+    public Ship screenWrap(int width, int height) {
+        Vector current = position;
+        if( current.getX()>width){
+            return new Ship(id, new Vector(0, current.getY()), direction, speed, acceleration, weapon, lives - 50);
+        }
+        else if(current.getX()<0){
+            return new Ship(id, new Vector(width, current.getY()), direction, speed, acceleration, weapon, lives - 50);
+        }
+        else if(current.getY()>height){
+            return new Ship(id, new Vector(current.getX(),0), direction, speed, acceleration, weapon, lives - 50);
+        }
+        else if(current.getY()<0){
+            return new Ship(id, new Vector(current.getX(),height), direction, speed, acceleration, weapon, lives - 50);
+        }
+        return this;
+    }
+
+    public float getAcceleration() {
+        return acceleration;
     }
 }

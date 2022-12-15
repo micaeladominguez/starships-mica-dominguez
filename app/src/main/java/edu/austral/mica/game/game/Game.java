@@ -36,4 +36,6 @@ public interface Game {
     Game unstopGame();
 
     Ship checkForFinishedGame();
+
+    Game saveGame();
 }

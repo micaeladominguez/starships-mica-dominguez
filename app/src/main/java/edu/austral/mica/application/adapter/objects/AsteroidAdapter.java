@@ -23,12 +23,21 @@ public class AsteroidAdapter implements ObjectAdapter {
 
     @NotNull
     private static ElementModel getElementModel(String k, Movable v) {
+        ImageRef im = defineImage(v);
         return new ElementModel(k,
                 v.getPosition().getX(),
                 v.getPosition().getY(),
                 AdapterConstants.heightAsteroid,
                 AdapterConstants.widthAsteroid,
                 v.getDirection().getAngle(),
-                ElementColliderType.Elliptical, AdapterConstants.asteroidRef);
+                ElementColliderType.Elliptical, im);
+    }
+
+    private static ImageRef defineImage(Movable v) {
+        if(v.getLives() <= 2){
+            return AdapterConstants.asteroidRef;
+        }else{
+            return AdapterConstants.asteroid2Ref;
+        }
     }
 }

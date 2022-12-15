@@ -43,7 +43,20 @@ public class GameInitializer {
     }
 
     private static String generateShipId(Integer idNumber) {
-        return "ship" + idNumber;
+        String added = getAddedRef(idNumber);
+        return "ship" + idNumber + added;
+    }
+
+    private static String getAddedRef(Integer idNumber) {
+        String added = "";
+        if(idNumber == 1){
+            added = "RED";
+        }else if(idNumber ==2){
+            added = "BLUE";
+        }else{
+            added = "";
+        }
+        return added;
     }
 
     private static Ship initializeShip(Integer idNumber, JSONObject ship, Integer differenceOnPosition){

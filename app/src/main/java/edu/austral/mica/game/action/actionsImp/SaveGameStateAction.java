@@ -7,7 +7,6 @@ import edu.austral.mica.game.game.Game;
 public class SaveGameStateAction implements Action {
     @Override
     public Game runAction(ObservableGame observableGame) {
-        //TODO
-        return observableGame.getGame();
+        return observableGame.getGame().saveGame();
     }
 }
