@@ -40,4 +40,7 @@ public class Constants {
 
     public static final int DIFFERENCE_BETWEEN_SHIP = 300;
     public static final double ASTEROID_NEW_RATE = 0.001;
+    public static String titleScores = " SCORES \n";
+    public static String titleLives = " LIVES \n";
+
 }

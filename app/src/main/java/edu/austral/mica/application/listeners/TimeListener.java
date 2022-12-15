@@ -29,7 +29,6 @@ public class TimeListener implements EventListener<TimePassed> {
                 game.changePositions(width, height);
             }
             Game new_game = observableGame.getGame().changePositions(width, height);
-            //  showScores(new_game);
             observableGame.setGame(new_game);
         }
     }

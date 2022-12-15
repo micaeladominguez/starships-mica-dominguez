@@ -51,21 +51,21 @@ public class ApplicationStarships extends Application {
         root.setId("pane");
         StackPane pane = new StackPane();
         StackPane stats = addText();
-        StackPane finalText = finalStat();
+        StackPane finalText = finalStat(primaryStage);
         pane.getChildren().addAll(root,stats, finalText);
         addCssToFacade(pane);
-        Scene scene = new Scene(pane);
-        keyTracker.setScene(scene);
-        primaryStage.setScene(scene);
+        gameScene = new Scene(pane);
+        keyTracker.setScene(gameScene);
+        primaryStage.setScene(gameScene);
         primaryStage.setHeight(WindowReader.readHeight());
         primaryStage.setWidth(WindowReader.readWidth());
     }
 
-    private StackPane finalStat() {
+    private StackPane finalStat(Stage primaryStage) {
         Text finalText = new Text();
         HBox finalDiv = getDiv(finalText,Pos.CENTER,30.0);
         StackPane stats = new StackPane();
-        facade.getTimeListenable().addEventListener(new EndGameListener(observableGame,finalText));
+        facade.getTimeListenable().addEventListener(new EndGameListener(observableGame,finalText,keyTracker,primaryStage,facade));
         stats.getChildren().addAll(finalDiv);
         return stats;
     }
@@ -109,7 +109,7 @@ public class ApplicationStarships extends Application {
     private void setObservableAndAdapter() {
         observableGame = new ObservableGame(readQuantityOfPlayers());
         observableGame.observe(new UIAdapter(this.facade.getElements()));
-        observableGame.setGame(ApplicationInitializer.selectGameStart(GameInitialization.LOAD, observableGame));
+        observableGame.setGame(ApplicationInitializer.selectGameStart(GameInitialization.NEW, observableGame));
         Adapter.adaptElement(facade.getElements(), observableGame.game.getElements());
     }
 
