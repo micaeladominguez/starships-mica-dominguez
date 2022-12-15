@@ -109,7 +109,7 @@ public class ApplicationStarships extends Application {
     private void setObservableAndAdapter() {
         observableGame = new ObservableGame(readQuantityOfPlayers());
         observableGame.observe(new UIAdapter(this.facade.getElements()));
-        observableGame.setGame(ApplicationInitializer.selectGameStart(GameInitialization.NEW, observableGame));
+        observableGame.setGame(ApplicationInitializer.selectGameStart(GameInitialization.LOAD, observableGame));
         Adapter.adaptElement(facade.getElements(), observableGame.game.getElements());
     }
 

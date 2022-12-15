@@ -38,4 +38,5 @@ public interface Game {
     Ship checkForFinishedGame();
 
     Game saveGame();
+    Game loadGame();
 }

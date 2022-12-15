@@ -71,7 +71,7 @@ public class GameInitializer {
         return new Ship(generateShipId(idNumber), position, direction, speed, acceleration, weapon, lives);
     }
 
-    private static Weapon defineWeapon(String weaponType) {
+    public static Weapon defineWeapon(String weaponType) {
         if(Objects.equals(weaponType, "DEFAULT")){
             return Constants.defaultWeapon;
         }else{

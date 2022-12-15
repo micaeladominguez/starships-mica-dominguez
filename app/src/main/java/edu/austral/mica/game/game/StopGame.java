@@ -1,6 +1,7 @@
 package edu.austral.mica.game.game;
 
 import edu.austral.ingsis.starships.ui.Collision;
+import edu.austral.mica.game.game.generators.SaveGame;
 import edu.austral.mica.gameManage.interfaces.Movable;
 import edu.austral.mica.gameManage.ship.Ship;
 
@@ -95,6 +96,11 @@ public class StopGame implements Game{
     @Override
     public Game saveGame() {
         SaveGame.saveGame(elements,scoresForShip);
+        return this;
+    }
+
+    @Override
+    public Game loadGame() {
         return this;
     }
 }

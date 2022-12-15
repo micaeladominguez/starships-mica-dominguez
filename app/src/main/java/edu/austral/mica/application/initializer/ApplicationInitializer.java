@@ -20,6 +20,6 @@ public class ApplicationInitializer {
     }
 
     private static Game startLoadedGame(ObservableGame observableGame) {
-        return observableGame.getGame().createNewGame();
+        return observableGame.getGame().loadGame();
     }
 }

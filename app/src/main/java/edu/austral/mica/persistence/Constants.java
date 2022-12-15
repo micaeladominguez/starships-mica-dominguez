@@ -36,6 +36,7 @@ public class Constants {
     public static final Weapon defaultWeapon = new DefaultWeapon(q_bullet_def,q_damage_def,speed_proj);
     public static final Weapon differentWeapon = new OtherWeapon1(q_bullet_oth1,q_damage_oth1,speed_proj);
     public static final String INITIAL_CONFIG_FILE_PATH = "/home/mica/faculty/DS/starships-base/app/src/main/java/edu/austral/mica/persistence/initial_config_file.json";
+    public static final String SAVE_FILE = "/home/mica/faculty/DS/starships-base/app/src/main/java/edu/austral/mica/persistence/savedFile.json";
 
     public static final int DIFFERENCE_BETWEEN_SHIP = 300;
     public static final double ASTEROID_NEW_RATE = 0.001;

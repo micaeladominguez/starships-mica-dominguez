@@ -1,10 +1,11 @@
-package edu.austral.mica.game.game;
+package edu.austral.mica.game.game.generators;
 
 import edu.austral.mica.gameManage.asteroid.Asteroid;
 import edu.austral.mica.gameManage.damage.Projectile;
 import edu.austral.mica.gameManage.interfaces.Movable;
 import edu.austral.mica.gameManage.ship.Ship;
 import edu.austral.mica.gameManage.vector.Vector;
+import edu.austral.mica.persistence.Constants;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -38,7 +39,7 @@ public class SaveGame {
             JSONArray jsonProjectiles = saveProjectiles(projectiles);
             JSONObject jsonObject = new JSONObject();
             addEntities(jsonObject, jsonAsteroids, jsonProjectiles, jsonShips);
-            FileWriter file = new FileWriter("savedFile.json");
+            FileWriter file = new FileWriter(Constants.SAVE_FILE);
             file.write(jsonObject.toJSONString());
             file.close();
         } catch (IOException e) {
@@ -85,7 +86,9 @@ public class SaveGame {
         addVector(projectile.getDirection(), jsonObject, "direction");
         jsonObject.put("shipId", projectile.getIdShip());
         jsonObject.put("speed", projectile.getSpeed());
-        jsonObject.put("speed", projectile.getLives());
+        jsonObject.put("lives", projectile.getLives());
+        jsonObject.put("damage",projectile.getDamage());
+
         return jsonObject;
 
     }

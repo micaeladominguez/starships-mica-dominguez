@@ -3,6 +3,7 @@ package edu.austral.mica.game.game;
 import edu.austral.ingsis.starships.ui.Collision;
 import edu.austral.mica.game.game.generators.AsteroidGenerator;
 import edu.austral.mica.game.game.generators.GameInitializer;
+import edu.austral.mica.game.game.generators.LoaderGame;
 import edu.austral.mica.game.game.managers.ScoreManager;
 import edu.austral.mica.game.game.managers.WeaponManager;
 import edu.austral.mica.gameManage.asteroid.Asteroid;
@@ -220,5 +221,10 @@ public class LiveGame implements Game{
     @Override
     public Game saveGame() {
         return this;
+    }
+
+    @Override
+    public Game loadGame() {
+        return LoaderGame.loadGame();
     }
 }
