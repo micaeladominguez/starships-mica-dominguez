@@ -10,6 +10,7 @@ import edu.austral.mica.gameManage.asteroid.Asteroid;
 import edu.austral.mica.gameManage.damage.Projectile;
 import edu.austral.mica.gameManage.interfaces.Movable;
 import edu.austral.mica.gameManage.ship.Ship;
+import edu.austral.mica.gameManage.ship.ShipScore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -207,14 +208,16 @@ public class LiveGame implements Game{
     }
 
     @Override
-    public Ship checkForFinishedGame() {
+    public ShipScore checkForFinishedGame() {
         ArrayList<Ship> ships = new ArrayList<>();
         this.elements.forEach((k,v) ->{
             if(v instanceof Ship && v.getLives() > 0){
                 ships.add((Ship) v);
             }
         });
-        if(ships.size() == 1) return ships.get(0);
+        if(ships.size() == 1)
+            return new ShipScore(ships.get(0), scoresForShip.get(ships.get(0).getId()));
+
         return null;
     }
 

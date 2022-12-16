@@ -1,18 +1,18 @@
 package edu.austral.mica.application;
+import edu.austral.mica.application.initializer.ApplicationInitializer;
+import edu.austral.mica.application.initializer.GameInitialization;
 import edu.austral.mica.application.listeners.*;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import edu.austral.ingsis.starships.ui.*;
-import edu.austral.mica.application.initializer.ApplicationInitializer;
-import edu.austral.mica.application.initializer.GameInitialization;
 import edu.austral.mica.application.adapter.Adapter;
 import edu.austral.mica.application.adapter.UIAdapter;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -109,6 +109,7 @@ public class ApplicationStarships extends Application {
     private void setObservableAndAdapter() {
         observableGame = new ObservableGame(readQuantityOfPlayers());
         observableGame.observe(new UIAdapter(this.facade.getElements()));
+        //ACA SE DEFINE LOAD O START
         observableGame.setGame(ApplicationInitializer.selectGameStart(GameInitialization.NEW, observableGame));
         Adapter.adaptElement(facade.getElements(), observableGame.game.getElements());
     }

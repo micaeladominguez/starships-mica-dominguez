@@ -7,6 +7,7 @@ import edu.austral.ingsis.starships.ui.TimePassed;
 import edu.austral.mica.application.ObservableGame;
 import edu.austral.mica.application.WindowReader;
 import edu.austral.mica.gameManage.ship.Ship;
+import edu.austral.mica.gameManage.ship.ShipScore;
 import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,11 +34,12 @@ public class EndGameListener implements EventListener<TimePassed> {
 
     @Override
     public void handle(TimePassed timePassed) {
-        Ship winner = observableGame.getGame().checkForFinishedGame();
+        ShipScore winner = observableGame.getGame().checkForFinishedGame();
         if (winner != null){
-            String id = winner.getId();
+            String id = winner.getShip().getId();
+            Integer score = winner.getScore();
             facade.getElements().clear();
-            finalText.setText("The game has ended! The winner is: " + Utils.getColor(id));
+            finalText.setText("The game has ended! The winner is " + Utils.getColor(id) + " with score : " + score);
             setScene();
         }
     }

@@ -4,6 +4,7 @@ import edu.austral.ingsis.starships.ui.Collision;
 
 import edu.austral.mica.gameManage.interfaces.Movable;
 import edu.austral.mica.gameManage.ship.Ship;
+import edu.austral.mica.gameManage.ship.ShipScore;
 
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public interface Game {
     Game stopGame();
     Game unstopGame();
 
-    Ship checkForFinishedGame();
+    ShipScore checkForFinishedGame();
 
     Game saveGame();
     Game loadGame();

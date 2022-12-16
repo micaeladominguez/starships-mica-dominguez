@@ -1,13 +1,18 @@
 package edu.austral.mica.application.listeners;
 
+import edu.austral.ingsis.starships.ui.ElementsViewFacade;
 import edu.austral.ingsis.starships.ui.EventListener;
 import edu.austral.ingsis.starships.ui.KeyPressed;
+import edu.austral.ingsis.starships.ui.KeyTracker;
 import edu.austral.mica.application.ObservableGame;
 import edu.austral.mica.game.action.Action;
 import edu.austral.mica.game.action.ActionMapper;
 import edu.austral.mica.game.game.Game;
 import edu.austral.mica.persistence.Constants;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -69,10 +74,6 @@ public class KeyPressedListener implements EventListener<KeyPressed> {
         Iterator it = keyBindings.iterator();
         return it;
     }
-
-
-
-
 
     @Override
     public void handle(KeyPressed event) {

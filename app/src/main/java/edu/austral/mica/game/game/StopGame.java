@@ -4,6 +4,7 @@ import edu.austral.ingsis.starships.ui.Collision;
 import edu.austral.mica.game.game.generators.SaveGame;
 import edu.austral.mica.gameManage.interfaces.Movable;
 import edu.austral.mica.gameManage.ship.Ship;
+import edu.austral.mica.gameManage.ship.ShipScore;
 
 import java.util.Map;
 
@@ -89,7 +90,7 @@ public class StopGame implements Game{
     }
 
     @Override
-    public Ship checkForFinishedGame() {
+    public ShipScore checkForFinishedGame() {
         return null;
     }
 

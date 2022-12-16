@@ -37,15 +37,9 @@ public class Vector {
     public Vector multiplyProjectileAndShip(Float scalar) {
         double new_x =  Math.cos(Math.toRadians(getAngle() + 90));
         double new_y =  Math.sin(Math.toRadians(getAngle() + 90));
-        return new Vector((float) (new_x * scalar), (float) (new_y * scalar));
+        return new Vector((float) ((new_x) * scalar), (float) ((new_y) * scalar));
     }
     public Vector subtract(Vector other) { return new Vector(x - other.x, y - other.y); }
-
-    public Vector asUnitary() {
-        final float module = getModule();
-        return new Vector(x / module, y / module);
-    }
-
 
     public float getX() {
         return x;
